@@ -110,14 +110,20 @@ public:
     void sortJob(const Worker* a, int size, const char* Jjob) {
         cout << "Работники с должностью " << Jjob << ":\n";
         for (int i = 0; i < size; i++) {
-            if (strstr(a[i].job, Jjob)) {
+            if (strstr(to_lower(a[i].job), to_lower(Jjob))) {
                  cout << a[i].name << "\n";
             }
         }
     }
-
+    const char* to_lower(const char* str) {
+        char* copy = new char[strlen(str) + 1];
+        for (int i = 0; i < strlen(str); i++) {
+            copy[i] = tolower(str[i]);
+        }
+        return copy;
+    }
     ~Worker() {
-        cout << job << " - " << name << " ушёл с работы\n";
+        cout << job << " - ";cout <<"\t" << name << " ушёл с работы\n";
         if (name) {
             delete[]name;
         }
